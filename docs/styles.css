@@ -1,0 +1,84 @@
+/* css styles */
+.parallax-container {
+  position: relative;
+}
+
+.parallax-image-container_1 {
+  background-image: url("freedom.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-image-container_2 {
+  background-image: url("influ.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-image-container_3 {
+  background-image: url("exper.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-image-container_4 {
+  background-image: url("particip.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-image-container_5 {
+  background-image: url("result.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-image-container_6 {
+  background-image: url("gender.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-image-container_7 {
+  background-image: url("question.png");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-image-container_8 {
+  background-image: url("idea.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  opacity: .8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

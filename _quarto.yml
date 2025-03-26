@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Er ytringsfriheten under press i Norge?"
+  navbar:
+    background: dark
+    search: false
+    left:
+    - text: "Main"
+      file: index.qmd
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: true
+
+
+

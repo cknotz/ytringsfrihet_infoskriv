@@ -1,0 +1,283 @@
+---
+title: "Er ytringsfriheten under press i Norge?"
+navbar: false
+css: styles.css
+lightbox: true
+lang: nb
+from: markdown+emoji
+---
+
+<div class="parallax-container"><div class="parallax-image-container_1"></div></div>
+
+<br/>
+
+```{r, warning=F, message=F, echo=F}
+library(tidyverse)
+library(marginaleffects)
+theme_set(theme_classic())
+treat <- nettskjemar::ns_get_data(446124)
+control <- nettskjemar::ns_get_data(495573)
+```
+
+```{r, echo=F}
+control %>% 
+  mutate(exper_group = "Så ikke Simen") -> control
+
+treat %>% 
+  mutate(exper_group = "Så Simen") -> treat
+treat %>% 
+  bind_rows(control) -> merged
+rm(control, treat)
+merged %>% 
+  mutate(gndr = droplevels(na_if(factor(gender),"other"))) %>% 
+  mutate(gndr = case_match(gndr,
+                           "female" ~ "Kvinne",
+                           "male" ~ "Mann")) -> merged
+merged %>% 
+  filter(partic_earlier=="no") -> merged
+```
+
+### Vår spørreundersøkelse
+
+Vi --- fem statsvitenskapsstudenter ved Universitetet i Stavanger og en veldig irrelevant, gammel akademiker --- ville finne ut hva nordmenn, og spesielt __unge__ nordmenn, mener om tilstanden til ytringsfriheten i Norge: Føler nordmenn at de fritt kan si hva de mener, eller opplever de at de må være forsiktige med å dele sine meninger?
+
+Så gjorde vi det statsvitere ofte gjør og gjennomførte en anonym meningsmåling, der vi stilte spørsmål om hvorvidt folk mener at ytringsfriheten er truet i Norge, hvordan de føler om "politisk ukorrekte" uttalelser, deres generelle politiske orientering og partipreferanser, deres (sosiale) mediebruk og noen få andre ting.
+
+Med det var ikke alt...
+
+<br/><br/>
+
+<div class="parallax-container"><div class="parallax-image-container_2"></div></div>
+
+<br/>
+
+### Hvor mye innflytelse har *influensere*?
+
+Vår undersøkelse hadde også et annet mål: Å finne ut om *influensere* på sosiale medier kan påvirke folks meninger om ytringsfrihet. Dette er et viktig spørsmål! (Nesten) alle bruker sosiale medier daglig, og mye av innholdet på sosiale medieplattformer kommer fra politiske organisasjoner som partier og interessegrupper, samt fra *influensere* med politiske standpunkter. Deres mål er selvsagt å påvirke folks meninger – og det er viktig å vite om dette faktisk fungerer!
+
+Men å svare på dette spørsmålet er vanskelig: Vi utsettes alle for ulike budskap fra forskjellige kilder på ulike mediekanaler hver dag – så hvordan kan vi isolere effekten av en enkelt kilde på folks meninger?
+
+For å løse dette problemet brukte vi en teknikk som er mye brukt innen statsvitenskap, men også i psykologi, økonomi og markedsføring: et *surveyeksperiment* (eller "A/B-test").
+
+<br/><br/>
+
+<div class="parallax-container"><div class="parallax-image-container_3"></div></div>
+
+<br/>
+
+### Dette gjorde vi
+
+Vi laget to versjoner av vårt spørreskjema. Begge versjonene var helt identiske – bortsett fra ett spørsmål: Det der vi spurte om respondentene var enige eller uenige i at "ytringsfriheten er under press", og at "unge mennesker ikke lenger tør si hva de mener" (se også @fig-exper under).
+
+Versjon 1 av spørsmålet sa bare at "mange i Norge sier" disse tingene.
+
+Men versjon 2 viste også et bilde av Simen Velle, en kjent ung politiker som er veldig aktiv på sosiale medier, og tilskrev uttalelsene direkte til ham (han kom faktisk med disse uttalelsene i en TV-debatt).
+
+::: {#fig-exper layout-ncol=2}
+
+![Spørsmål versjon 1](control.png)
+
+![Spørsmål versjon 2](treat.png)
+:::
+
+Vi sendte deretter respondentene tilfeldig til den ene eller den andre versjonen av spørreskjemaet og sammenlignet senere svarene: Svarte de som tilfeldig så Simen annerledes enn de som ikke så ham?
+
+(Det er viktig å legge til at vi ikke valgte Simen fordi vi støtter ham, partiet hans eller meningene hans. Vi har forskjellige synspunkter på disse tingene. Vi "brukte" ham simpelthen fordi han er kjent i Norge, aktiv på sosiale medier, og fordi han har kommet med relevante uttalelser om ytringsfrihet. Fra et vitenskapelig perspektiv er han bare et "eksempel på en politisk *influencer*".)
+
+<br/><br/>
+
+<div class="parallax-container"><div class="parallax-image-container_4"></div></div>
+
+<br/>
+
+### Våre deltakere
+
+`r nrow(merged)` personer deltok i vår undersøkelse (**tusen takk** hvis du var en av dem!). Mange deltakere kommer fra Rogaland og deltok på Åpen dag ved Universitetet i Stavanger, mens mange andre er fra Oslo-området. Noen få fant også undersøkelsen via LinkedIn. Litt over halvparten av deltakerne er kvinner (57%; 43% er menn), og de er i gjennomsnitt 20,7 år gamle. Det er mer eller mindre alt vi kan si – undersøkelsen var jo anonym!
+
+<br/><br/>
+
+<div class="parallax-container"><div class="parallax-image-container_5"></div></div>
+
+<br/>
+
+### Ja, men kom til poenget! Hva fant dere ut?
+
+Ok, ok. Først, la oss se på hvordan folk generelt opplever ytringsfriheten, uavhengig av om de så Simen Velle eller ikke.
+
+Det viser seg (se @fig-hist) at våre deltakere i det minste delvis er enige i at ytringsfriheten er truet. De fleste svarene ligger i den øvre delen av skalaen, og dette reflekteres også i gjennomsnittsverdien på 5,7. Bare en liten gruppe ser ingen trussel mot ytringsfriheten.
+
+```{r, warning=F, message=F, echo=F}
+#| label: fig-hist
+merged %>% 
+  ggplot(aes(exper_scale)) +
+    geom_bar(aes(y = (..count..)/sum(..count..)), fill = "#14409a") +
+    geom_density(color = "grey") +
+    scale_y_continuous(labels = scales::percent) +
+    scale_x_continuous(breaks = seq(0,10,1),
+                       labels = c("Ikke i det hele tatt",
+                                  as.character(seq(1,4,1)),"Verken eller",
+                                  as.character(seq(6,9,1)),"Helt enig")) +
+    labs(y = "",x = "", caption = paste0("Gjennomsnitt = ",round(mean(merged$exper_scale, na.rm = T), digits = 1)),
+         title = "I hvilken grad er du enig at ytringsfriheten er under press?")
+```
+
+Nå til det viktige: Hadde det å se Simen en påvirkning på svarene? Når vi ser på svarene delt inn etter om folk så Simen eller ikke (se @fig-diffs), finner vi at nivået av enighet med utsagnet om at ytringsfriheten er truet, er litt høyere i gruppen som så Simen (gjennomsnittsverdi = 5,9) sammenlignet med gruppen som ikke så ham (gjennomsnittsverdi = 5,4).
+
+Men vi må også sikre oss at det vi ser her virkelig er en systematisk forskjell og ikke bare tilfeldig variasjon. For å gjøre dette kan vi bruke en statistisk test for å se om forskjellen mellom de to gruppene er mer enn bare "støy". Vi kan beregne "konfidensintervaller" som (enkelt forklart) viser hvor mye "tilfeldig støy" det er i dataene våre – og det viser seg at det faktisk er litt for mye støy i dataene. Den sanne effekten av å se Simen kan være en økning i enighet om at ytringsfriheten er truet med +0,5 poeng – men den kan også være 0. Vi kan ikke si mer med sikkerhet.
+
+```{r, echo=F, warning=F, message=F}
+#| layout-ncol: 2
+#| label: fig-diffs
+#| fig-cap: "Noen forksjell i svarmønstrene"
+#| fig-subcap: 
+#|   - "Forskjell i svarmønster mellom gruppene"
+#|   - "Effekt av å se Simen"
+
+merged %>% 
+  ggplot(aes(x = exper_group, y = exper_scale, fill = exper_group)) +
+    geom_violin(color = "white") +
+    geom_text(data = merged %>% group_by(exper_group) %>% summarise(avg = mean(exper_scale, na.rm = T)),
+              aes(x = exper_group, y = avg,
+                  label = paste0("Gjennoms. = ",round(avg, digits = 1))),
+              color = c("white","black")) +
+    scale_y_continuous(breaks = seq(0,10,1),
+                       labels = c("Ikke i det hele tatt",
+                                  as.character(seq(1,4,1)),"Verken eller",
+                                  as.character(seq(6,9,1)),"Helt enig")) +
+    scale_fill_manual(values = c("lightblue","#14409a")) +
+    labs(x = "", y = "Er du enig at ytringsfriheten er under press?") +
+    theme(legend.position = "none")
+
+broom::tidy(t.test(exper_scale ~ rev(exper_group), data = merged)) %>% 
+  mutate(label = " ") %>% 
+  ggplot(aes(x = label, y = estimate, ymin = conf.low, ymax = conf.high)) +
+    geom_point(color = "lightblue", size = 8) +
+    geom_linerange(color = "grey") +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+    scale_y_continuous(breaks = seq(0,1,.25),
+                       labels = paste0("+",as.character(seq(0,1,.25)))) +
+    labs(x = "", caption = "95% konfidensintervaller",
+         y = "Effekt") +
+    theme(axis.ticks.x = element_blank())
+
+```
+
+Men…
+
+<br/><br/>
+
+<div class="parallax-container"><div class="parallax-image-container_6"></div></div>
+
+<br/>
+
+### Er det kanskje forskjeller mellom menn og kvinner?
+
+Vi vet at menn og kvinner --- og spesielt unge menn og kvinner --- ofte har veldig forskjellige politiske meninger, og det kan være at dette også påvirker hvordan de reagerer på en høyreorientert *influencer* som Simen.
+
+Når vi ser på menn og kvinner separat (se @fig-gndr), viser det seg at menn knapt reagerer på å se Simen – men kvinner gjør det! Blant kvinner øker enigheten om at ytringsfriheten er truet med rundt +0,7 poeng dersom de ser Simen. Og i dette tilfellet kan vi si med tilstrekkelig sikkerhet at effekten blant kvinner ikke bare er «støy».
+
+```{r, echo=F, message=F, warning=F}
+#| layout-ncol: 2
+#| label: fig-gndr
+#| fig-cap: "Effekten er større blant kvinner"
+#| fig-subcap: 
+#|   - "Forskjell i svarmønster mellom kjønn"
+#|   - "Effekt av å se Simen blant menn og kvinner"
+merged %>% 
+  drop_na(gndr) %>%
+  group_by(gndr, exper_group) %>% 
+  summarise(avg_scale = mean(exper_scale, na.rm = T)) %>% 
+  ggplot(aes(x = exper_group, y = avg_scale, 
+             fill = gndr, alpha = exper_group)) +
+    facet_wrap(~gndr) +
+    geom_col() +
+    scale_alpha_manual(values = c(.6,1)) +
+    scale_fill_manual(values = c("darkorange","#14409a")) +
+    scale_y_continuous(breaks = seq(0,6,1)) +
+    labs(x = "", y = "Gjennomsn. oppslutning:\n Ytringsfrihet er under press") +
+    theme(legend.position = "none")
+
+mod3 <- lm(exper_scale ~ exper_group*gndr,
+           data = merged)
+avg_slopes(model = mod3,
+           variables = "exper_group",
+           by = "gndr") %>% 
+  ggplot(aes(x = gndr, y = estimate, color = gndr,
+             ymin = conf.low, ymax = conf.high)) +
+    geom_point(size = 8) +
+    geom_linerange(color = "grey") +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+    scale_color_manual(values = c(c("darkorange","#14409a"))) +
+    scale_y_continuous(breaks = seq(-.5,1.5,.5),
+                       labels = scales::label_number(style_positive = "plus",
+                                                     style_negative = "minus")) +
+    labs(y = "Effekt på oppslutning: \n Ytringsfrihet er under press",
+         caption = "95% konfidensintervaller", x = "") +
+    theme(legend.position = "none")
+
+
+```
+
+<br/><br/>
+
+<div class="parallax-container"><div class="parallax-image-container_7"></div></div>
+
+<br/>
+
+### Gode utseende?
+
+Hvorfor reagerer kvinner sterkere på Simen? Kan det være utseendet hans, eller er det noe annet? Dessverre spurte vi ikke respondentene våre om hvor attraktive de synes Simen er, men vi spurte om deres generelle politiske orientering: Hvor langt til venstre eller høyre de er på en skala fra 0 (ytterste venstre) til 10 (ytterste høyre). Kan det være at det kun er høyreorienterte kvinner som reagerer positivt på Simen?
+
+Det stemmer faktisk (se @fig-ideo)! Vi kan teste hvordan effekten av å se Simen varierer mellom menn og kvinner etter hvert som de blir mindre venstre- og mer høyreorienterte. Igjen finner vi ingen effekt av å se Simen blant menn, uansett hvor venstre- eller høyreorienterte de er – men kvinner reagerer sterkere på å se Simen jo mer høyreorienterte de er.
+
+```{r, echo = F, message=F, warning=F}
+#| label: fig-ideo
+#| fig-cap: "Effekten er størst blant høyreorienterte kvinner"
+
+lrmod2 <- lm(exper_scale ~ exper_group*lrscale*gndr,
+            data = merged)
+avg_slopes(model = lrmod2,
+           variables = "exper_group",
+           by = c("lrscale","gndr")) %>% 
+ggplot(aes(x = lrscale, y = estimate, ymin = conf.low, 
+             ymax = conf.high, color = gndr, fill = gndr)) +
+    geom_line() +
+    geom_ribbon(alpha = .4, color = NA) +
+    facet_wrap(~gndr, nrow = 1) +
+    geom_hline(yintercept = 0, linetype = "dashed", 
+               color = "black") +
+    scale_fill_manual(values = c("Mann" = "#14409a",
+                                 "Kvinne" = "darkorange")) +
+    scale_color_manual(values = c("Mann" = "#14409a",
+                                 "Kvinne" = "darkorange")) +
+    scale_x_continuous(breaks = seq(0,10,1),
+                       labels = c("Venstre",as.character(seq(1,9,1)),"Høyre")) +
+    scale_y_continuous(breaks = seq(-2.5,3.5,.5),
+                       labels = scales::label_number(style_positive = "plus",
+                                                     style_negative = "minus")) +
+    labs(x = "Politisk orientering", y = "Effekt av å se Simen",
+         fill = "", color = "",
+         caption = "95% konfidensintervaller") +
+    theme(legend.position = "none")
+```
+
+<br/><br/>
+
+<div class="parallax-container"><div class="parallax-image-container_8"></div></div>
+
+<br/>
+
+### OK, nå var det vel litt mye informasjon :roll_eyes: Hva betyr alt dette?
+
+Det har vi lært:
+
+1. Unge nordmenn er faktisk i det minste litt bekymret for tilstanden til ytringsfriheten i Norge, uavhengig av deres kontakt med profilerte personer på sosiale medier.
+2. Sosial media *influensere* kan virkelig ha en betydelig effekt på hva folk er enige eller uenige i – men i dette tilfellet avhenger effekten av personens kjønn og i hvilken grad de er politisk på samme side som *influenseren*.
+
+
+### Har vi nå manipulert eller «hjernevasket» deltakerne våre?
+
+Nei. Selvfølgelig kunne vi ikke fortelle deltakerne om eksperimentet, for da ville det ikke ha fungert. Men først og fremst ga vi ikke deltakerne våre feil informasjon: Simen har faktisk uttalt disse påstandene – og han er ikke den eneste som kommer med slike uttalelser om ytringsfrihet, så det er også korrekt at «folk» sier disse tingene.
+
+Teknisk sett har vi kun vist at folk reagerer forskjellig på en uttalelse om ytringsfrihet avhengig av hvordan uttalelsen er «innrammet» (om den kommer fra en politisk *influenser* eller fra «folk») – og dette er ikke det samme som en grunnleggende endring i deres politiske overbevisninger eller ideologi. Vi vet også fra tidligere forskning at denne typen *«framing»*-effekter ikke er så stabile, spesielt når folk senere blir eksponert for ulike utsagn. Likevel er det viktig å vise at personer som Simen faktisk kan ha denne påvirkningen på i det minste noen av oss.
+
