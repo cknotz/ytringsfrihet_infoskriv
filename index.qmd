@@ -99,7 +99,7 @@ merged %>%
                                   as.character(seq(1,4,1)),"Verken eller",
                                   as.character(seq(6,9,1)),"Helt enig")) +
     labs(y = "",x = "", caption = paste0("Gjennomsnitt = ",round(mean(merged$exper_scale, na.rm = T), digits = 1)),
-         title = "I hvilken grad er du enig at ytringsfriheten er under press?")
+         title = "I hvilken grad er du enig i at ytringsfriheten er under press?")
 ```
 
 Nå til spørsmål to: Hadde det å se Simen en påvirkning på svarene? Når vi ser på svarene delt inn etter om folk så Simen eller ikke (se @fig-diffs), finner vi at nivået av enighet med utsagnet om at ytringsfriheten er truet, er litt høyere i gruppen som så Simen (gjennomsnittsverdi = 5,9) sammenlignet med gruppen som ikke så ham (gjennomsnittsverdi = 5,4).
