@@ -1,15 +1,12 @@
 ---
 title: "Er ytringsfriheten under press i Norge?"
 navbar: false
-css: styles.css
 lightbox: true
 lang: nb
 from: markdown+emoji
 ---
 
-<div class="parallax-container"><div class="parallax-image-container_1"></div></div>
-
-<br/>
+![ ](freedom.jpg)
 
 ```{r, warning=F, message=F, echo=F}
 library(tidyverse)
@@ -45,13 +42,9 @@ Så gjorde vi det statsvitere ofte gjør og gjennomførte en anonym meningsmåli
 
 Med det var ikke alt...
 
-<br/><br/>
-
-<div class="parallax-container"><div class="parallax-image-container_2"></div></div>
-
-<br/>
-
 ### Hvor mye innflytelse har *influensere*?
+
+![ ](influ.jpg)
 
 Vår undersøkelse hadde også et annet mål: Å finne ut om *influensere* på sosiale medier kan påvirke folks meninger om ytringsfrihet. Dette er et viktig spørsmål! (Nesten) alle bruker sosiale medier daglig, og mye av innholdet på sosiale medieplattformer kommer fra politiske organisasjoner som partier og interessegrupper, samt fra *influensere* med politiske standpunkter. Deres mål er selvsagt å påvirke folks meninger – og det er viktig å vite om dette faktisk fungerer!
 
@@ -59,19 +52,15 @@ Men å svare på dette spørsmålet er vanskelig: Vi utsettes alle for ulike bud
 
 For å løse dette problemet brukte vi en teknikk som er mye brukt innen statsvitenskap, men også i psykologi, økonomi og markedsføring: et *surveyeksperiment* (eller "A/B-test").
 
-<br/><br/>
-
-<div class="parallax-container"><div class="parallax-image-container_3"></div></div>
-
-<br/>
-
 ### Dette gjorde vi
+
+![ ](exper.jpg)
 
 Vi laget to versjoner av vårt spørreskjema. Begge versjonene var helt identiske – bortsett fra ett spørsmål: Det der vi spurte om respondentene var enige eller uenige i at "ytringsfriheten er under press", og at "unge mennesker ikke lenger tør si hva de mener" (se også @fig-exper under).
 
 Versjon 1 av spørsmålet sa bare at "mange i Norge sier" disse tingene.
 
-Men versjon 2 viste også et bilde av Simen Velle, en kjent ung politiker som er veldig aktiv på sosiale medier, og tilskrev uttalelsene direkte til ham (han kom faktisk med disse uttalelsene i en TV-debatt).
+Men versjon 2 viste også et bilde av Simen Velle, en kjent ung politiker som er veldig aktiv på sosiale medier, og tilskrev uttalelsene direkte til ham (han kom faktisk med disse uttalelsene i en [TV-debatt](https://www.tiktok.com/@jegsnakkerfrp/video/7484665830362336534)).^[Bildet tok vi fra *Wikipedia* (av AndreasLoK – Eget verk, CC BY-SA 4.0, <https://commons.wikimedia.org/w/index.php?curid=118668935>).]
 
 ::: {#fig-exper layout-ncol=2}
 
@@ -84,23 +73,15 @@ Vi sendte deretter respondentene tilfeldig til den ene eller den andre versjonen
 
 (Det er viktig å legge til at vi ikke valgte Simen fordi vi støtter ham, partiet hans eller meningene hans. Vi har forskjellige synspunkter på disse tingene. Vi "brukte" ham simpelthen fordi han er kjent i Norge, aktiv på sosiale medier, og fordi han har kommet med relevante uttalelser om ytringsfrihet. Fra et vitenskapelig perspektiv er han bare et "eksempel på en politisk *influencer*".)
 
-<br/><br/>
-
-<div class="parallax-container"><div class="parallax-image-container_4"></div></div>
-
-<br/>
-
 ### Våre deltakere
+
+![ ](particip.jpg)
 
 `r nrow(merged)` personer deltok i vår undersøkelse (**tusen takk** hvis du var en av dem!). Mange deltakere kommer fra Rogaland og deltok på Åpen dag ved Universitetet i Stavanger, mens mange andre er fra Oslo-området. Noen få fant også undersøkelsen via LinkedIn. Litt over halvparten av deltakerne er kvinner (57%; 43% er menn), og de er i gjennomsnitt 20,7 år gamle. Det er mer eller mindre alt vi kan si – undersøkelsen var jo anonym!
 
-<br/><br/>
-
-<div class="parallax-container"><div class="parallax-image-container_5"></div></div>
-
-<br/>
-
 ### Ja, men kom til poenget! Hva fant dere ut?
+
+![ ](result.jpg)
 
 Ok, ok. Først, la oss se på hvordan folk generelt opplever ytringsfriheten, uavhengig av om de så Simen Velle eller ikke.
 
@@ -121,7 +102,7 @@ merged %>%
          title = "I hvilken grad er du enig at ytringsfriheten er under press?")
 ```
 
-Nå til det viktige: Hadde det å se Simen en påvirkning på svarene? Når vi ser på svarene delt inn etter om folk så Simen eller ikke (se @fig-diffs), finner vi at nivået av enighet med utsagnet om at ytringsfriheten er truet, er litt høyere i gruppen som så Simen (gjennomsnittsverdi = 5,9) sammenlignet med gruppen som ikke så ham (gjennomsnittsverdi = 5,4).
+Nå til spørsmål to: Hadde det å se Simen en påvirkning på svarene? Når vi ser på svarene delt inn etter om folk så Simen eller ikke (se @fig-diffs), finner vi at nivået av enighet med utsagnet om at ytringsfriheten er truet, er litt høyere i gruppen som så Simen (gjennomsnittsverdi = 5,9) sammenlignet med gruppen som ikke så ham (gjennomsnittsverdi = 5,4).
 
 Men vi må også sikre oss at det vi ser her virkelig er en systematisk forskjell og ikke bare tilfeldig variasjon. For å gjøre dette kan vi bruke en statistisk test for å se om forskjellen mellom de to gruppene er mer enn bare "støy". Vi kan beregne "konfidensintervaller" som (enkelt forklart) viser hvor mye "tilfeldig støy" det er i dataene våre – og det viser seg at det faktisk er litt for mye støy i dataene. Den sanne effekten av å se Simen kan være en økning i enighet om at ytringsfriheten er truet med +0,5 poeng – men den kan også være 0. Vi kan ikke si mer med sikkerhet.
 
@@ -164,13 +145,9 @@ broom::tidy(t.test(exper_scale ~ rev(exper_group), data = merged)) %>%
 
 Men…
 
-<br/><br/>
-
-<div class="parallax-container"><div class="parallax-image-container_6"></div></div>
-
-<br/>
-
 ### Er det kanskje forskjeller mellom menn og kvinner?
+
+![ ](gender.jpg)
 
 Vi vet at menn og kvinner --- og spesielt unge menn og kvinner --- ofte har veldig forskjellige politiske meninger, og det kan være at dette også påvirker hvordan de reagerer på en høyreorientert *influencer* som Simen.
 
@@ -218,13 +195,9 @@ avg_slopes(model = mod3,
 
 ```
 
-<br/><br/>
-
-<div class="parallax-container"><div class="parallax-image-container_7"></div></div>
-
-<br/>
-
 ### Gode utseende?
+
+![ ](question.png)
 
 Hvorfor reagerer kvinner sterkere på Simen? Kan det være utseendet hans, eller er det noe annet? Dessverre spurte vi ikke respondentene våre om hvor attraktive de synes Simen er, men vi spurte om deres generelle politiske orientering: Hvor langt til venstre eller høyre de er på en skala fra 0 (ytterste venstre) til 10 (ytterste høyre). Kan det være at det kun er høyreorienterte kvinner som reagerer positivt på Simen?
 
@@ -261,12 +234,6 @@ ggplot(aes(x = lrscale, y = estimate, ymin = conf.low,
     theme(legend.position = "none")
 ```
 
-<br/><br/>
-
-<div class="parallax-container"><div class="parallax-image-container_8"></div></div>
-
-<br/>
-
 ### OK, nå var det vel litt mye informasjon :roll_eyes: Hva betyr alt dette?
 
 Det har vi lært:
@@ -274,10 +241,13 @@ Det har vi lært:
 1. Unge nordmenn er faktisk i det minste litt bekymret for tilstanden til ytringsfriheten i Norge, uavhengig av deres kontakt med profilerte personer på sosiale medier.
 2. Sosial media *influensere* kan virkelig ha en betydelig effekt på hva folk er enige eller uenige i – men i dette tilfellet avhenger effekten av personens kjønn og i hvilken grad de er politisk på samme side som *influenseren*.
 
+![ ](idea.png){fig-align="center"}
 
 ### Har vi nå manipulert eller «hjernevasket» deltakerne våre?
 
-Nei. Selvfølgelig kunne vi ikke fortelle deltakerne om eksperimentet, for da ville det ikke ha fungert. Men først og fremst ga vi ikke deltakerne våre feil informasjon: Simen har faktisk uttalt disse påstandene – og han er ikke den eneste som kommer med slike uttalelser om ytringsfrihet, så det er også korrekt at «folk» sier disse tingene.
+Nei. Selvfølgelig kunne vi ikke fortelle deltakerne om eksperimentet, ellers ville det ikke ha fungert. Men først og fremst ga vi ikke deltakerne våre feil informasjon: Simen sa faktisk de uttalelsene – og han er ikke den eneste som kommer med slike uttalelser om ytringsfrihet, så det er også korrekt at «folk» sier slike ting.
 
-Teknisk sett har vi kun vist at folk reagerer forskjellig på en uttalelse om ytringsfrihet avhengig av hvordan uttalelsen er «innrammet» (om den kommer fra en politisk *influenser* eller fra «folk») – og dette er ikke det samme som en grunnleggende endring i deres politiske overbevisninger eller ideologi. Vi vet også fra tidligere forskning at denne typen *«framing»*-effekter ikke er så stabile, spesielt når folk senere blir eksponert for ulike utsagn. Likevel er det viktig å vise at personer som Simen faktisk kan ha denne påvirkningen på i det minste noen av oss.
+Mer viktig er det at eksperimentet rett og slett fanget noe som allerede eksisterer i den virkelige verden. Enkelt sagt simulerte det hva som skjer når Simen Velle (eller en annen *influencer*) deler en politisk uttalelse på sosiale medier, sammenlignet med når for eksempel en nyhetskanal deler den samme uttalelsen, men uten kobling til en spesifikk person («folk sier…»). Våre resultater indikerer at folk reagerer ulikt på den samme uttalelsen avhengig av om den kommer fra en *influencer* eller ikke, og dette skjer enten vi måler det eller ikke.
+
+Teknisk sett har vi også bare vist at folk reagerer ulikt på en uttalelse om ytringsfrihet avhengig av hvordan uttalelsen er «rammet inn» (om den er gjort av en politisk *influencer* eller «folk») – og denne spontane reaksjonen er ikke det samme som en fundamental endring i deres politiske tro eller ideologi.^[Se også Zaller, J. R. and Feldman, S. (1992). A simple theory of the survey response: Answering questions versus revealing preferences. *American Journal of Political Science*, 36(3):579–616.]
 
