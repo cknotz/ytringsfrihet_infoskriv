@@ -149,7 +149,7 @@ Men…
 
 ![ ](gender.jpg)
 
-Vi vet at menn og kvinner --- og spesielt unge menn og kvinner --- ofte har veldig forskjellige politiske meninger, og det kan være at dette også påvirker hvordan de reagerer på en høyreorientert *influenser* som Simen.
+Vi vet at menn og kvinner --- og spesielt unge menn og kvinner --- ofte har veldig forskjellige politiske meninger, og det kan være at dette også påvirker hvordan de reagerer på en høyreorientert *influenser* som Simen.^[Se f.eks. Milosav *et al.*, *Journal of European Public Policy* (2025, [doi.org/10.1080/13501763.2025.2481181](https://doi.org/10.1080/13501763.2025.2481181){target="_blank"}).]
 
 Når vi ser på menn og kvinner separat (se @fig-gndr), viser det seg at menn knapt reagerer på å se Simen --- men kvinner gjør det! Blant kvinner øker enigheten om at ytringsfriheten er truet med rundt +0,7 poeng dersom de ser Simen. Og i dette tilfellet kan vi si med tilstrekkelig sikkerhet at effekten blant kvinner ikke bare er «støy».
 
