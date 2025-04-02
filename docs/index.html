@@ -69,6 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Søk"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -132,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="influ.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="influ.jpg" class="img-fluid"></a></p>
 <p>Vår undersøkelse hadde også et annet mål: Å finne ut om <em>influensere</em> på&nbsp;sosiale medier kan påvirke folks meninger om ytringsfrihet. Dette er et viktig spørsmål! (Nesten) alle bruker sosiale medier daglig, og mye av innholdet på sosiale medieplattformer kommer fra politiske organisasjoner som partier og interessegrupper, samt fra <em>influensere</em> med politiske standpunkter. Deres mål er selvsagt å påvirke folks meninger – og det er viktig å vite om dette faktisk fungerer!</p>
 <p>Men å svare på dette spørsmålet er vanskelig: Vi utsettes alle for ulike budskap fra forskjellige kilder på ulike mediekanaler hver dag – så hvordan kan vi isolere effekten én enkel kilde har på folks holdninger?</p>
-<p>For å løse dette problemet brukte vi en teknikk som er mye brukt innen statsvitenskap, men også i psykologi, økonomi og markedsføring: et <em>surveyeksperiment</em> (eller “A/B-test”).</p>
+<p>For å løse dette problemet brukte vi en teknikk som er mye brukt innen statsvitenskap, men også i psykologi, økonomi og markedsføring: et <em>surveyeksperiment</em> (eller “A/B-test”, som man sier i markedsføring).</p>
 </section>
 <section id="dette-gjorde-vi" class="level3">
 <h3 class="anchored" data-anchor-id="dette-gjorde-vi">Dette gjorde vi</h3>
@@ -167,13 +170,31 @@ Figur&nbsp;1
 </figcaption>
 </figure>
 </div>
-<p>Vi sendte deretter respondentene tilfeldig til den ene eller den andre versjonen av spørreskjemaet og sammenlignet senere svarene: Svarte de som tilfeldigvis så Simen annerledes enn de som ikke så ham?</p>
+<p>Vi brukte landingssiden til undersøkelsen til å&nbsp;sende respondentene tilfeldig til den ene eller den andre versjonen av spørreskjemaet. Etterpå sammenlignet vi svarene: Svarte de som tilfeldigvis så Simen annerledes enn de som ikke så ham?</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+A[Landings-/Velkomstside] --&gt; B(Randomisering)
+B --&gt; C[Spørreskjema versjon 1]
+B --&gt; D[Spørreskjema versjon 2]
+C --&gt; E[Analyse]
+D --&gt; E[Analyse]
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>(Det er viktig å legge til at vi ikke valgte Simen fordi vi støtter ham, partiet hans eller meningene hans. Vi har forskjellige synspunkter på disse tingene. Vi “brukte” ham simpelthen fordi han er kjent i Norge, aktiv på sosiale medier, og fordi han har kommet med relevante uttalelser om ytringsfrihet. Fra et vitenskapelig perspektiv er han bare et “eksempel på en politisk <em>influenser</em>”.)</p>
 </section>
 <section id="våre-deltakere" class="level3">
 <h3 class="anchored" data-anchor-id="våre-deltakere">Våre deltakere</h3>
 <p><a href="particip.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="particip.jpg" class="img-fluid"></a></p>
-<p>319 personer deltok i vår undersøkelse (<strong>tusen takk</strong> hvis du var en av dem!). Mange deltakere kommer fra Rogaland og deltok på Åpen dag ved Universitetet i Stavanger, mens mange andre er fra Oslo-området. Noen få fant også undersøkelsen via LinkedIn. Litt over halvparten av deltakerne er kvinner (57%; 43% er menn), og de er i gjennomsnitt 20,7 år gamle. Det er mer eller mindre alt vi kan si – undersøkelsen var jo anonym!</p>
+<p>322 personer deltok i vår undersøkelse (<strong>tusen takk</strong> hvis du var en av dem!). Mange deltakere kommer fra Rogaland og deltok på Åpen dag ved Universitetet i Stavanger, mens mange andre er fra Oslo-området. Noen få fant også undersøkelsen via LinkedIn. Litt over halvparten av deltakerne er kvinner (57%; 43% er menn), og de er i gjennomsnitt 20,7 år gamle. Det er mer eller mindre alt vi kan si – undersøkelsen var jo anonym!</p>
 </section>
 <section id="ja-men-kom-til-poenget-hva-fant-dere-ut" class="level3">
 <h3 class="anchored" data-anchor-id="ja-men-kom-til-poenget-hva-fant-dere-ut">Ja, men kom til poenget! Hva fant dere ut?</h3>
@@ -746,7 +767,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

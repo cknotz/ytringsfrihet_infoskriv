@@ -50,7 +50,7 @@ Vår undersøkelse hadde også et annet mål: Å finne ut om *influensere* på 
 
 Men å svare på dette spørsmålet er vanskelig: Vi utsettes alle for ulike budskap fra forskjellige kilder på ulike mediekanaler hver dag – så hvordan kan vi isolere effekten én enkel kilde har på folks holdninger?
 
-For å løse dette problemet brukte vi en teknikk som er mye brukt innen statsvitenskap, men også i psykologi, økonomi og markedsføring: et *surveyeksperiment* (eller "A/B-test").
+For å løse dette problemet brukte vi en teknikk som er mye brukt innen statsvitenskap, men også i psykologi, økonomi og markedsføring: et *surveyeksperiment* (eller "A/B-test", som man sier i markedsføring).
 
 ### Dette gjorde vi
 
@@ -69,7 +69,17 @@ Men versjon 2 viste også et bilde av Simen Velle, en kjent ung politiker som er
 ![Spørsmål versjon 2](treat.png)
 :::
 
-Vi sendte deretter respondentene tilfeldig til den ene eller den andre versjonen av spørreskjemaet og sammenlignet senere svarene: Svarte de som tilfeldigvis så Simen annerledes enn de som ikke så ham?
+Vi brukte landingssiden til undersøkelsen til å sende respondentene tilfeldig til den ene eller den andre versjonen av spørreskjemaet. Etterpå sammenlignet vi svarene: Svarte de som tilfeldigvis så Simen annerledes enn de som ikke så ham?
+
+```{mermaid}
+flowchart LR
+A[Landings-/Velkomstside] --> B(Randomisering)
+B --> C[Spørreskjema versjon 1]
+B --> D[Spørreskjema versjon 2]
+C --> E[Analyse]
+D --> E[Analyse]
+
+```
 
 (Det er viktig å legge til at vi ikke valgte Simen fordi vi støtter ham, partiet hans eller meningene hans. Vi har forskjellige synspunkter på disse tingene. Vi "brukte" ham simpelthen fordi han er kjent i Norge, aktiv på sosiale medier, og fordi han har kommet med relevante uttalelser om ytringsfrihet. Fra et vitenskapelig perspektiv er han bare et "eksempel på en politisk *influenser*".)
 
